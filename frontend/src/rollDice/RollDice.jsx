@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function RollDice({ checkWin }) {
+const RollDice = ({ checkWin }) => {
     const faces = 6
 
     const [rolls, setRolls] = useState([])
@@ -15,7 +15,7 @@ function RollDice({ checkWin }) {
             const number = Math.floor((Math.random() * faces) + 1)
             arrayRolls.push(number)
         }
-        setRolls([1, 2, 2, 4, 4])
+        setRolls(arrayRolls)
         setBtnDisabled(true)
         await checkWin(pastryWin)
     }
