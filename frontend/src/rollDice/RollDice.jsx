@@ -15,7 +15,7 @@ const RollDice = ({ checkWin }) => {
             const number = Math.floor((Math.random() * faces) + 1)
             arrayRolls.push(number)
         }
-        setRolls(arrayRolls)
+        setRolls([1, 2, 2, 4, 4])
         setBtnDisabled(true)
         await checkWin(pastryWin)
     }
@@ -134,8 +134,6 @@ const RollDice = ({ checkWin }) => {
     }, [doublePair, carre, yahtzee])
 
     checkNumbers(rolls)
-
-    console.log('help', pastryWin)
 
     return (
         <div>

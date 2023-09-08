@@ -1,35 +1,19 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const userSettings = [
-    {
-      username: "pigos",
-      password: "pass1"
-    }
-  ]
-
-  const handleSubmit = (event) => {
-    // Prevent page reload
-    event.preventDefault();
-
-    const { username, password } = document.forms[0]
-
-    const userData = userSettings.find((user) => user.username === username.value)
-
-    if (userData) {
-      if (userData.password !== password.value) {
-        console.log('Wrong password')
-      } else {
-        setIsSubmitted(true)
-        console.log('You are log')
-      }
-    } else {
-      console.log('Wrong username')
-    }
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await axios.post("http://localhost:8000/login", {
+      username: username,
+      password: password
+    })
+  }
 
   return (
     <>
@@ -37,11 +21,11 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <label>Username</label>
-            <input type="text" name="username" required />
+            <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} required />
           </div>
           <div>
             <label>Password</label>
-            <input type="password" name="password" required />
+            <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <div>
             <button type="submit">Login</button>

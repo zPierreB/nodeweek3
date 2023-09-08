@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { getAllResults, createResult } from '../controllers/results.controller.js'
+import { isAuth } from '../controllers/user.controller.js'
 
 const resultRouter = Router()
 

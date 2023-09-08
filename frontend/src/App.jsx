@@ -5,7 +5,7 @@ import './App.css'
 import RollDice from './rollDice/RollDice.jsx'
 
 const App = () => {
-  const [count, setCount] = useState()
+  const [count, setCount] = useState(0)
   const [maxNumbers, setMaxNumbers] = useState()
   const [pastries, setPastries] = useState([])
 
@@ -32,12 +32,13 @@ const App = () => {
       amount: 1,
       order: pastry.order
     })
+    setCount(count - 1)
+    setMaxNumbers(maxNumbers - 1)
   }
 
   const getAllNumbers = async () => {
     let maxNum = 0
     pastries.map((pastry) => {
-      console.log(pastry.number)
       maxNum = maxNum + pastry.number
     })
     setMaxNumbers(maxNum - 30)
@@ -52,6 +53,8 @@ const App = () => {
     index()
   }, [count, maxNumbers])
 
+  console.log('count:', count)
+
   return (
     <>
       <h1>Wanna win a pastry? Roll the dice!</h1>
@@ -64,7 +67,7 @@ const App = () => {
           <div>
             {pastries.length > 0 && pastries.map((pastry) =>
               <li key={pastry._id}>
-                <p name={pastry.name}><strong>{pastry.name}</strong>, Amount: {pastry.number} <button onClick={() => update(pastry)} disabled={count <= 0 || maxNumbers <= 0}>Take the {pastry.name} </button></p>
+                <p name={pastry.name}><strong>{pastry.name}</strong>, Amount: {pastry.number} <button onClick={() => update(pastry)} disabled={count <= 0}>Take the {pastry.name} </button></p>
               </li>
             )}
           </div>
